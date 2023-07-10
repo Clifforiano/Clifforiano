@@ -1,0 +1,154 @@
+# importes
+from colorama import Fore,Style,Back
+import numpy as np
+#Textos
+
+menu1="""Creativos.cl
+1) Comprar entradas.
+2) Entradas disponibles.
+3) Ver asistentes.
+4) Ganancias totales.
+5) Salir.
+"""
+error="""Error: Ingreso un dato no permitido"""
+
+tipo="""
+Seleccione el tipo de entrada
+1-20 Platinum : $120.000
+21-50 Gold     : $80.000
+51-100 Silver   : 50.000
+"""
+#listas y dicionario
+
+entc=set()
+ent={}
+dd=[]
+
+#Funciones
+
+def com():
+    while True:
+        try:
+            en=int(input("Digitar cantidad de entradas a comprar\n"))
+            if en>=1 and en<=3:
+                break
+            else:
+                    print(Fore.RED+"Solo se admiten comprar 1, 2 o 3 entradas"+Style.RESET_ALL)
+        except:
+            print(Fore.RED+error+Style.RESET_ALL)
+    while True:
+        try:
+            nom=input("Digite su nombre\n")
+            if (len(nom))>4:
+                break
+            else:
+                print(Fore.RED+"error: El formato es erroneo"+Style.RESET_ALL)
+
+        except:
+            print(Fore.RED+error+Style.RESET_ALL)
+    while True:
+        try:
+            rut=input("Digite el rut\n")
+            if rut.isdigit():
+                break
+            else:
+                print(Fore.RED+"Error: El rut debe ser solo numerico"+Style.RESET_ALL)
+        except:
+            print(Fore.RED+error+Style.RESET_ALL)
+
+    dis()
+
+    print(f"\n{tipo}\n")
+    c=0
+    c1=0
+    c2=0
+
+    for ii in range (en):
+            ca=int(input("Digite su numero de entrada\n"))
+            if ca>=1 and ca<=20:
+                c=c+1
+                p=120000
+                pep=str(ca)
+                entc.add(pep)
+                dd.append(120000)
+                ent[ii]={'Rut':rut,'Nombre':nom,'Entrada':ca,'Tipo':"Platinum"}
+
+            elif ca>=21 and ca<=50:
+                c1=c1+1
+                p1=80000
+                pep=str(ca)
+                entc.add(pep)
+                dd.append(80000)
+                ent[ii]={'Rut':rut,'Nombre':nom,'Entrada':ca,'Tipo':"Gold"}
+            elif ca>=51 and ca<=100:
+                c2=c2+1
+                p2=50000
+                pep=str(ca)
+                entc.add(pep)
+                dd.append(50000)
+                ent[ii]={'Rut':rut,'Nombre':nom,'Entrada':ca,'Tipo':"Silver"}
+
+
+
+
+
+def dis():
+    print(Fore.GREEN+"ENTRADA DISPONIBLE"+Style.RESET_ALL)
+    print(Fore.RED+"ENTRADA NO DISPONIBLE\n"+Style.RESET_ALL)
+
+    for i in range (1,101):
+        c=str(i)
+        if c in entc:
+            print(Fore.RED+c+Style.RESET_ALL,end=" ")
+        else:
+            print(Fore.GREEN+c+Style.RESET_ALL,end=" ")
+        if i%25==0:
+            print()
+    
+
+def lis():
+    print("Asistentes")
+    for i in ent.values():
+        print(i)
+
+def tot():
+    print("Total de ganancias")
+    a=dd.count(120000)
+    b=dd.count(80000)
+    c=dd.count(50000)
+    f=(120000*a)+(b*80000)+(c*50000)
+    print("Tipo entrada   Cantidad   Total")
+    print(f"Platinum     : {a}     {120000*a}")
+    print(f"Gold         : {b}     {80000*b}")
+    print(f"Silver       : {c}     {50000*c}")
+    print(f"TOTAL FINAL : {f}")
+        
+            
+
+#main
+
+while True:
+    try:
+        op=int(input(menu1))
+        if op==1:
+            com()
+            input(Fore.GREEN+"\nPresione cualquier tecla para continuar\n"+Style.RESET_ALL)
+        if op==2:
+            dis()
+            input(Fore.GREEN+"\nPresione cualquier tecla para continuar\n"+Style.RESET_ALL)
+        if op==3:
+            lis()
+            input(Fore.GREEN+"Presione cualquier tecla para continuar\n"+Style.RESET_ALL)
+        if op==4:
+            tot()
+            input(Fore.GREEN+"Presione cualquier tecla para continuar\n"+Style.RESET_ALL)
+        if op==5:
+            print("Hasta luego \n")
+            print("Cliffer Ramirez 10/07/2023")
+            input(Fore.GREEN+"Presione cualquier tecla para continuar\n"+Style.RESET_ALL)
+            break
+    except:
+        input(Fore.RED+error+Style.RESET_ALL)
+
+
+        
